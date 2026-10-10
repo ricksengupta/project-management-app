@@ -32,3 +32,14 @@ model WorkspaceMember {
 
   @@id([userId, workspaceId])
 }
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   TimestamptzString @default(now())
+  updatedAt   temporal.updatedAtString()
+
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+}
